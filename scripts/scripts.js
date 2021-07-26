@@ -4,9 +4,27 @@ const $html = document.querySelector('html')
 const $checkbox = document.querySelector('#switch')
 
 $checkbox.addEventListener('change', function(){
-    $html.classList.toggle('dark-mode')
+    if (this.checked) {
+        $html.classList.add('dark-mode');
+        localStorage.setItem('dark-mode', 'true');
+    }
+    else {
+        $html.classList.remove('dark-mode');
+        localStorage.setItem('dark-mode', 'false');
+    }
 });
-
+// Recovery Dark Mode data //
+function recuperarDarkMode() {
+    const valor = localStorage.getItem('dark-mode');
+    if (valor == 'true') {
+        $html.classList.add('dark-mode');
+        $checkbox.setAttribute('checked', 'checked');
+    }
+    else {
+        $html.classList.remove('dark-mode');
+    }
+}
+recuperarDarkMode();    
 // Acordeon //
 
 const acordeonArray=document.getElementsByClassName('acordeon');
